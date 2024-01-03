@@ -1,0 +1,65 @@
+USE SchoolDB;
+
+CREATE TABLE Classes (
+    ID INT IDENTITY(100,1) PRIMARY KEY,
+	Class_Name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Students (
+    ID INT IDENTITY(1000,1) PRIMARY KEY,
+	Last_Name VARCHAR(30) NOT NULL,
+    First_Name VARCHAR(30) NOT NULL,
+	Class_ID INT,
+    Birthdate DATE,
+	FOREIGN KEY (Class_ID)
+		REFERENCES Classes (ID)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+
+CREATE TABLE Courses (
+	ID INT IDENTITY(10000,1) PRIMARY KEY,
+	Course_Name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Enrollments (
+	ID INT Identity(1,1) PRIMARY KEY,
+	Student_ID INT,
+	Course_ID INT,
+	FOREIGN KEY (Student_ID) 
+		REFERENCES Students (ID),
+	FOREIGN KEY (Course_ID)
+		REFERENCES Courses (ID)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+)
+
+USE SchoolDB
+GO
+
+
+CREATE TABLE Grades (
+	ID INT Identity(1,1) PRIMARY KEY NOT NULL,
+	GRADE INT NOT NULL,
+	Student_ID INT,
+	Course_ID INT,
+	Date_Set DATE NOT NULL,
+
+	FOREIGN KEY (Student_ID)
+		REFERENCES Students (ID),
+	FOREIGN KEY (Course_ID)
+		REFERENCES Courses (ID)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+)
+
+USE SchoolDB
+GO
+
+CREATE TABLE Employees (
+	ID INT Identity(1,1) PRIMARY KEY,
+	Last_Name VARCHAR(30) NOT NULL,
+    First_Name VARCHAR(30) NOT NULL,
+	Occupation VARCHAR(30) NOT NULL,
+    Birthdate DATE,
+)
